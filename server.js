@@ -14,15 +14,14 @@ app.get('/', (req, res) => {
     res.send('<h1>Servidor de Productos</h1>')
 })
 
-app.get('/productos', (req, res) => {
-    const productos = contenedor.getAll()
+app.get('/productos', async (req, res) => {
+    const productos = await contenedor.getAll()
     res.send(`<h2>Lista de productos obtenidos: </h2>
             <p>${productos}</p>`)
 })
 
-app.get('/productoRandom', (req, res) => {
-    const productoRandom = contenedor.getRandom()
-    res.send(`<h2>Producto obtenido de forma aleatoria: </h2>
-            <p>${productoRandom}</p>`)
+app.get('/productoRandom', async (req, res) => {
+    const productoRandom = await contenedor.getRandom()
+    res.send('<h2>Producto obtenido de forma aleatoria: </h2>'+productoRandom)
 })
 

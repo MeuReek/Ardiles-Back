@@ -11,11 +11,9 @@ class Contenedor {
       const contenido = await fs.promises.readFile("./productos.txt", "utf8");
       const infoText = JSON.stringify(contenido, null, 2)
       const info = JSON.parse(infoText)
-      console.log(`Contenido del Archivo leído:
-      ${info}`); 
+      return info
     } catch (error) {
-      console.log(`No se pudo leero correctamente el Archivo. 
-      ${error}`);
+      return error
     }
   }
 
@@ -23,13 +21,12 @@ class Contenedor {
   async getRandom() {
     try {
       const contenido = await fs.promises.readFile("./productos.txt", "utf8");
-      setTimeout(() => {
-      const indice = Math.floor(Math.random() * contenido.length);
-      //const producto = contenido[indice];
-      console.log(`Producto encontrado de forma aleatoria: ${indice}`);
-    }, 3000);
+      const productos = JSON.parse(contenido)
+      const indice = Math.floor(Math.random() * productos.length());
+      const productoRandom = productos[indice];
+      return productoRandom
     } catch (error) {
-      console.log(`No se pudo leer correctamente el Archivo. ${error}`);
+        return error
     }
   }
 
