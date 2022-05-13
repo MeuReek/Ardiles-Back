@@ -1,46 +1,44 @@
 const express = require('express')
-//const Contenedor = require('./main')
 const { Router } = express
 
 const app = express()
 
-
-const routerApi = new Router()
+app.use(express.static('public'))
+app.use(express.urlencoded({ extended: true }))
+const routerApi = Router()
 
 routerApi.use(express.json())
 
-//const contenedor = new Contenedor('/productos.txt')
+const productos = [{}]
 
-
-routerApi.get("/api", (req, res) => {
-    res.send("<h1>Servidor de Productos</h1>");
-  });
-
-routerApi.get("/api/productos", async (req, res) => {
-    const productos = await contenedor.getAll();
-    res.send(`<h2>Lista de productos obtenidos: </h2>
-              <p>${productos}</p>`);
+routerApi.get("/productos", async (req, res) => {
+    res.send("<h1>Servidor de Productos</h1>")
+    res.json(productos);
   });
   
 
-routerApi.get("/api/productos/:id", async (req, res) => {
-    const productos = await contenedor.getAll();
-    res.send(`<h2>Lista de productos obtenidos: </h2>
-              <p>${productos}</p>`);
+routerApi.get("/productos/:id", async (req, res) => {
+    const id = req.params.id;
+    res.json(productos[id]);
   });
 
 
-routerApi.post("/api/productos/:id", async (req, res) => {
+routerApi.post("/productos", async (req, res) => {
+  productos.push(req.body)
+  res.send("<h1>Servidor de Productos</h1>")
+  res.json(productos);
     
 })
 
-routerApi.put("/api/productos/:id", async (req, res) => {
+routerApi.put("/productos/:id", async (req, res) => {
    
   });
 
 
-routerApi.delete("/api/productos/:id", async (req, res) => {
-   
+routerApi.delete("/productos/:id", async (req, res) => {
+  const id = req.params.id;
+  productos[id] = {};
+  res.json("Producto Eliminado");
   });
 
 

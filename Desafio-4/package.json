@@ -1,7 +1,6 @@
 {
   "name": "desafio-4",
   "version": "1.0.0",
-  "description": "",
   "main": "servidor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,5 +16,6 @@
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.13",
     "tailwindcss": "^3.0.24"
-  }
+  },
+  "description": ""
 }
