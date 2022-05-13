@@ -9,10 +9,9 @@ const routerApi = Router()
 
 routerApi.use(express.json())
 
-const productos = [{}]
+const productos = []
 
 routerApi.get("/productos", async (req, res) => {
-    res.send("<h1>Servidor de Productos</h1>")
     res.json(productos);
   });
   
@@ -24,15 +23,30 @@ routerApi.get("/productos/:id", async (req, res) => {
 
 
 routerApi.post("/productos", async (req, res) => {
-  productos.push(req.body)
-  res.send("<h1>Servidor de Productos</h1>")
+  const id = productos.length + 1;
+  const { nombre, precio, imagen } = req.body;
+  const producto = { ...req.body, id };
+  productos.push(producto);
   res.json(productos);
     
 })
 
 routerApi.put("/productos/:id", async (req, res) => {
-   
-  });
+  const { id } = req.params;
+  const { nombre, precio, imagen } = req.body;
+  if (id) {
+      _.each(productos, (prod, i) => {
+          if (prod.id === id) {
+              prod.nombre = nombre;
+              prod.precio = precio;
+              prod.imagen = imagen;
+        }
+      });
+      res.json(productos);
+  } else {
+      res.json("Error: No se encuentra el producto");
+  }
+});
 
 
 routerApi.delete("/productos/:id", async (req, res) => {
