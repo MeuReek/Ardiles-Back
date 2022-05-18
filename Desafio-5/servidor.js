@@ -1,58 +1,32 @@
 const express = require('express');
-
 const app = express()
-
 const handlebars = require('express-handlebars');
 
-app.engine(
-    "hbs",
-    handlebars({
-        extname: "hbs",
-        defaultlayout: "index.hbs",
-        layoutDir: __dirname + "/views/layouts",
-        partialsDir: __dirname + "/views/partials"
-    })
-);
+const productos = [];
 
+app.engine("hbs", handlebars.engine());
 app.set("view engine", "hbs");
-
-app.set("views", "./views");
-
+app.set("views", "./public/views");
 app.use(express.static("./public"));
 
+app.get("/", (req, res) => {
+    res.render("./public/views/layouts/index.hbs", {productos})
+});
 
-app.get("/api", (req, res) => {
-res.render("<h1>Servidor de Productos</h1>");
-  });
-
-ápp.get("/api/productos", async (req, res) => {
-    const productos = await contenedor.getAll();
-    res.send(`<h2>Lista de productos obtenidos: </h2>
-              <p>${productos}</p>`);
-  });
-  
-
-app.get("/api/productos/:id", async (req, res) => {
-    const productos = await contenedor.getAll();
-    res.send(`<h2>Lista de productos obtenidos: </h2>
-              <p>${productos}</p>`);
-  });
+app.get("/productos", (req, res) => {
+    res.render("productos", {productos})  
+});
 
 
-app.post("/api/productos/:id", async (req, res) => {
-    
-})
-
-app.put("/api/productos/:id", async (req, res) => {
-   
-  });
-
-
-app.delete("/api/productos/:id", async (req, res) => {
-   
-  });
+app.post("/productos", (req, res) => {
+  productos.push(req.body);
+  res.redirect("/productos")
+});
 
 
 
-
-app.listen(8080);
+const PORT = 8080;
+app.listen(PORT, err => {
+  if(err) throw new Error (`Error en el servidor ${err}`) 
+  console.log(`Servidor esta corriendo satisfactoriamente en el puerto ${PORT}` )
+});
