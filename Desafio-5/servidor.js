@@ -6,15 +6,15 @@ const productos = [];
 
 app.engine("hbs", handlebars.engine());
 app.set("view engine", "hbs");
-app.set("views", "./public/views");
-app.use(express.static("./public"));
+app.set("views", "./public");
+app.use(express.static("./public/layouts"));
 
 app.get("/", (req, res) => {
-    res.render("./public/views/layouts/index.hbs", {productos})
+    res.render("./public/layouts/views/index.hbs", { productos })
 });
 
 app.get("/productos", (req, res) => {
-    res.render("productos", {productos})  
+    res.render("./public/layouts/partials/productos.hbs", {productos})  
 });
 
 
