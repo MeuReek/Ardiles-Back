@@ -1,21 +1,14 @@
-{{>formulario}}
-{{>productos}}
-{{>chat}}
+const socket = io.connect();
 
-{{const socket = io.connect()}};
-
-{{function addMessage(e){
+function addMessage(e){
     const message = {
         author: document.getElementById("username").value,
         message: document.getElementById("text").value,
     }
-
     socket.emit('new-message', message);
     return false
-
 }
-}}
-{{
+
 function render(data) { 
     const html = data.map((elem, index) =>{
         return(`
@@ -27,7 +20,5 @@ function render(data) {
 
     document.getElementById("messages").innerHTML = html
  }
-}}
-{{
+
 socket.on("messages", function(data) {render(data)});
-}}
