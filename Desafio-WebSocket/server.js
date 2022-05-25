@@ -10,7 +10,7 @@ const io = new IOServer(httpServer)
 const productos = []
 
 const messages = [
-    { author: '', message: ''}
+    { author: '', date: '', message: ''}
 ]
 
 app.use(express.urlencoded({ extended: true }))
@@ -26,7 +26,7 @@ app.post('/productos', (req, res) => {
     res.redirect('/')
 })
 
-io.on('connection', (socket) => {
+io.on('connection', socket => {
     console.log('Cliente Conectado!')
     socket.emit('messages', messages)
     socket.on('new-message', data => {
@@ -36,4 +36,4 @@ io.on('connection', (socket) => {
 })
 
 const PORT = 8080;
-app.listen(PORT, () => console.log('Iniciando conexión en el puerto: ' + PORT))
+httpServer.listen(PORT, () => console.log('Iniciando conexión en el puerto: ' + PORT))
