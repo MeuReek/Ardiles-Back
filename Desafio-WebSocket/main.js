@@ -6,8 +6,7 @@ function addMessage(e){
         message: document.getElementById("text").value,
         date: Date.now()
     }
-    socket.emit('new-message', message);
-    return false
+    socket.emit('new-message', message);    
 }
 
 function render(data) { 
@@ -18,9 +17,9 @@ function render(data) {
         <em>${new Date(elem.date).toLocaleString()}</em>
         <em>${elem.message}</em>
         </div>`)
-    }).join("")
+    }).join(" ")
 
     document.getElementById("mensajes").innerHTML = html
  }
 
-socket.on("messages", function(data) {render(data)});
+socket.on("messages", function(data) { render(data) });

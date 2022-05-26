@@ -13,8 +13,7 @@ const messages = [
     { author: '', date: '', message: ''}
 ]
 
-app.use(express.urlencoded({ extended: true }))
-
+app.use(express.static('views'))	
 app.set("view engine", "ejs")
 
 app.get('/', (req, res) => {
@@ -28,7 +27,8 @@ app.post('/productos', (req, res) => {
 
 io.on('connection', socket => {
     console.log('Cliente Conectado!')
-    socket.emit('messages', messages)
+    socket.send('messages', messages)
+
     socket.on('new-message', data => {
         messages.push(data)
         io.sockets.emit('messages', messages)
