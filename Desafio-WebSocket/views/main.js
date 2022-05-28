@@ -6,6 +6,7 @@ function addMessage(e){
         message: document.getElementById("text").value,
         date: Date.now()
     }
+    e.preventDefault();
     socket.emit('new-message', message);    
 }
 
@@ -21,5 +22,5 @@ function render(data) {
 
     document.getElementById("mensajes").innerHTML = html
  }
-
-socket.on("messages", function(data) { render(data) });
+ addEventListener("submit",addMessage); 
+ socket.on("messages", function(data) { render(data) });

@@ -17,10 +17,10 @@ app.use(express.static('views'))
 app.set("view engine", "ejs")
 
 app.get('/', (req, res) => {
-    res.render('inicio', { productos })
+    res.render('inicio')
 })
 
-app.post('/productos', (req, res) => {
+app.post('./views/productos.ejs', (req, res) => {
     productos.push(req.body)
     res.redirect('/')
 })
