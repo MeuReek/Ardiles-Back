@@ -21,6 +21,6 @@ function render(data) {
     }).join(" ")
 
     document.getElementById("mensajes").innerHTML = html
- }
- addEventListener("submit",addMessage); 
- socket.on("messages", function(data) { render(data) });
+}
+addEventListener("submit",addMessage); 
+socket.on("messages", function(data) { render(data) });

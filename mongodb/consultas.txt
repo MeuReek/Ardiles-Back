@@ -1,0 +1,39 @@
+// Para crear base de datos ecommerce
+1- Use ecommerce 
+// Para crear las colecciones
+2- db.createCollection("mensajes")
+   db.createCollection("productos")
+//Para crear documentos
+//productos
+3-db.productos.insertOne({Producto: "Pantalon", Precio: 500, Stock: 10})
+{
+        "acknowledged" : true,
+        "insertedId" : ObjectId("62a1635ce2eefa58ee6574f6")
+}
+db.productos.insertMany([{Producto: "Body", Precio: 200, Stock: 20}, {Producto: "Remerita", Precio: 430, Stock: 20}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62a163b6e2eefa58ee6574f7"),
+                ObjectId("62a163b6e2eefa58ee6574f8")
+        ]
+}
+db.productos.insertMany([{Producto: "Calza", Precio: 300, Stock: 10}, {Producto: "Gorrito", Precio: 150, Stock: 15}, {Producto: "Batita", Precio: 230, stock: 30}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62a164dcae0c51bc8f272bad"),
+                ObjectId("62a164dcae0c51bc8f272bae"),
+                ObjectId("62a164dcae0c51bc8f272baf")
+        ]
+}
+db.productos.insertMany([{Producto: "Manoplas", Precio: 90, Stock: 50}, {Producto: "Rodillera", Precio: 75, Stock: 35}, {Producto: "Medias", Precio: 90, Stock: 32},{Producto: "Manta Polar", Precio: 500, Stock: 20}])
+{
+        "acknowledged" : true,
+        "insertedIds" : [
+                ObjectId("62a165fd4e31308d6593a407"),
+                ObjectId("62a165fd4e31308d6593a408"),
+                ObjectId("62a165fd4e31308d6593a409"),
+                ObjectId("62a165fd4e31308d6593a40a")
+        ]
+}

@@ -17,7 +17,7 @@ app.use(express.static('views'))
 app.set("view engine", "ejs")
 
 app.get('/', (req, res) => {
-    res.render('inicio')
+    res.render("inicio", {productos, messages})
 })
 
 app.post('./views/productos.ejs', (req, res) => {
