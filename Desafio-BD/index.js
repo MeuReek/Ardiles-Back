@@ -1,14 +1,18 @@
-import { options }  from "./options/config.js";
-import ClienteSQL from './bases.js';
+import options from "./bases/config.js";
+import ClienteSQL from './bases/sqlBase.js';
+import SqliteClient from './bases/sqliteBase.js';
+import { Router } from 'express';
 
-const clienteSql = new ClienteSQL(options.mariaDb);
-const clienteSqlite = new ClienteSQL(options.sqlite3);
+const clienteSql = new ClienteSQL(options.mysql, 'ApiProductos');
+const clienteSqlite = new SqliteClient (options.sqlite3, 'Mensajes');
 
-try {
-    await clienteSql.crearTabla();
-    console.log("Tabla creada");
+const productosRouter = Router();
 
-    const productos = [
+productosRouter.post('/api/productos', (req, res) => {
+    clienteSql.crearTabla();
+    res.send("Tabla creada");
+})
+        /*const productos = [
         {Nombre: 'Batita', Precio: 910, imagen: ""},
         {Nombre: 'Ajuar Liso', Precio: 1820, imagen: ""},
         {Nombre: 'Ajuar Estampado', Precio: 2020, imagen: ""},
@@ -40,11 +44,6 @@ try {
 
     const mensajesEmitidos = await clienteSqlite.mostrarMensajes(mensajes);
     console.log("Lista de Mensajes");
-    console.table(mensajesEmitidos);
+    console.table(mensajesEmitidos);*/
 
-} catch (error) {
-    console.log(error);
-} finally {
-    clienteSql.close();
-}
-    
+    export default productosRouter;
