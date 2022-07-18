@@ -5,37 +5,51 @@ class ClienteSQL{
     constructor(options){
         this.knex = knex(options);
     }
-
+    
     async crearTabla(){
         try{
-            return this.knex.schema.dropTableIfExists('Productos')
-            .finally(() => {
-                return this.knex.schema.createTable('Productos', table => {
-                    table.increments('ID').primary();
-                    table.string('Nombre', 50).notNullable;
-                    table.float('Precio').notNullable;
-                    table.string('Imagen');
-                })
+            await this.knex.schema.dropTableIfExists('Productos');
+            await this.knex.schema.createTable('Productos', table => {
+            table.integer.increments('ID').primary();
+            table.string('Nombre', 50).notNullable;
+            table.float('Precio').notNullable;
+            table.string('Imagen');
             })
+        }catch(error){
+            console.log(error); throw error }
+    };
+
+
+    async crearProducto(productos){
+        try {
+            await this.knex('Productos').insert(productos);
+            
+        } catch (error) {
+                
+        }
+    }
+
+    async obtenerProductos(){
+        try {
+            await this.knex('Productos').select('*');
+        }catch(error){
+            console.log(error);
+        }        
+    }
+
+    async obtenerProducto(id){
+        try{
+            await this.knex.from('Productos').where('ID', id).first();
         }catch(error){
             console.log(error);
         }
     }
-
-    crearProducto(productos){
-        return this.knex('Productos').insert(productos);
+    async close(){
+        try{
+            await this.knex.destroy();
+        }catch(error){
+            console.log(error);
+        }
     }
-
-    obtenerProductos(productos){
-        return this.knex('Productos').select('*');
-    }
-
-    obtenerProducto(id){
-        return this.knex('Productos').where('ID', id).first();
-    }
-    close(){
-        this.knex.destroy();
-    }
-
 }
 export default ClienteSQL;

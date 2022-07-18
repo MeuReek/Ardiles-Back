@@ -6,7 +6,7 @@ const options = {
         port: 3306,
         user: 'root',
         password: 'mauri',
-        database: 'Productos'
+        database: 'ApiProductos'
     }
     },
     sqlite3: {

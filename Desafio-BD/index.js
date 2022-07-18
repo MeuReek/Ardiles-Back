@@ -6,12 +6,15 @@ import { Router } from 'express';
 const clienteSql = new ClienteSQL(options.mysql, 'ApiProductos');
 const clienteSqlite = new SqliteClient (options.sqlite3, 'Mensajes');
 
-const productosRouter = Router();
+const routerProductos = Router();
 
-productosRouter.post('/api/productos', (req, res) => {
-    clienteSql.crearTabla();
-    res.send("Tabla creada");
-})
+//routerProductos.get('/api', (req, res) => {
+    //clienteSql.crearTabla();
+    //res.json({ "Mensaje": "Tabla creada" });
+    //const productosAgrgados = [req.body];
+    //clienteSql.crearProducto(productosAgrgados);
+    //res.json(productosAgrgados);
+//})
         /*const productos = [
         {Nombre: 'Batita', Precio: 910, imagen: ""},
         {Nombre: 'Ajuar Liso', Precio: 1820, imagen: ""},
@@ -46,4 +49,4 @@ productosRouter.post('/api/productos', (req, res) => {
     console.log("Lista de Mensajes");
     console.table(mensajesEmitidos);*/
 
-    export default productosRouter;
+    export default routerProductos;
